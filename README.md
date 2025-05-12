@@ -8,3 +8,6 @@
 
 ## 排序
 > cargo run --release --bin sort -- sort_input.txt sort_output.txt
+
+
+对于现代机器 100000000个数据 通常可以跑到 2s内
