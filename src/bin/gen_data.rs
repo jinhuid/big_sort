@@ -1,28 +1,23 @@
-use std::env;
+use std::{env, fs::File, io::{self, BufWriter, Write}};
 
 use rand::Rng;
 
-fn main() {
+fn main() -> io::Result<()> {
     let data_size = env::args()
         .nth(1)
-        .unwrap()
-        .parse::<u32>()
+        .and_then(|s| s.parse::<u32>().ok())
         .unwrap_or(100000000);
-    let mut data = Vec::new();
-    (0..data_size).for_each(|_| {
-        data.push(random(0, 1e8 as u32));
-        // data.push();
-    });
 
-    let out_path = env::current_dir().unwrap().join("data.txt");
-    std::fs::write(
-        out_path,
-        data.iter()
-            .map(|x| x.to_string())
-            .collect::<Vec<String>>()
-            .join("\n"),
-    )
-    .unwrap();
+    let file = File::create("sort_input.txt").expect("创建文件失败");
+    let mut writer = BufWriter::with_capacity(32 * 1024 * 1024, file);
+
+    for _ in 0..data_size {
+        writeln!(writer, "{}", random(0, 1e8 as u32))?;
+    }   
+
+    writer.flush()?;
+    println!("已生成 {} 个随机数据到 sort_input.txt", data_size);
+    Ok(())
 }
 
 fn random(min: u32, max: u32) -> u32 {

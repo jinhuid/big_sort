@@ -4,7 +4,7 @@
 > 极致的速度
 
 ## 生成数据
-> cargo run --bin gen_data -- 100000000
+> cargo run --release --bin gen_data -- 100000000
 
 ## 排序
-> cargo run --bin sort -- data.txt
+> cargo run --release --bin sort -- sort_input.txt sort_output.txt
