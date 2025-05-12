@@ -1,0 +1,12 @@
+[package]
+name = "sort"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+crossbeam-utils = "0.8.21"
+itoa = "1.0.15"
+memmap2 = "0.9.5"
+num_cpus = "1.16.0"
+rand = "0.9.0"
+rayon = "1.10.0"
