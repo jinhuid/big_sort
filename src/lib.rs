@@ -1,4 +1,3 @@
-use num_cpus;
 use rayon::prelude::*;
 
 pub struct Parser;
@@ -31,7 +30,7 @@ impl Parser {
 
     fn chunk_to_int(chunk: &[u8]) -> Vec<u32> {
         // 吧一个数字当初8个字节来算
-        let mut parsed_chunk = Vec::with_capacity(chunk.len() / 8 as usize);
+        let mut parsed_chunk = Vec::with_capacity(chunk.len() / 8_usize);
         let mut current_number: u32 = 0;
         let mut parsing = false;
         for &byte in chunk {
@@ -76,7 +75,7 @@ impl Parser {
             .par_chunks(chunk_size)
             .map(|chunk| {
                 let mut buffer = Vec::with_capacity(chunk.len() * 10); // 预估每个数字平均10个字节
-                chunk.into_iter().for_each(|&num| {
+                chunk.iter().for_each(|&num| {
                     // println!("num: {}", num);
                     Self::fast_write_int(num, &mut buffer);
                 });

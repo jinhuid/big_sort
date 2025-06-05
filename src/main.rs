@@ -47,7 +47,7 @@ fn parse_int(data: &[u8]) -> Vec<u32> {
     parsed_int
 }
 
-fn sort_integers(nums: &mut Vec<u32>) -> Vec<u32> {
+fn sort_integers(nums: &mut [u32]) -> Vec<u32> {
     let sort_start = Instant::now();
     nums.par_sort_unstable();
     println!("排序完成: 耗时: {:.3}s", sort_start.elapsed().as_secs_f32());
